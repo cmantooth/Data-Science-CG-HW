@@ -1,0 +1,191 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fmodern\fcharset0 Courier;\f2\fnil\fcharset0 Monaco;
+}
+{\colortbl;\red255\green255\blue255;\red19\green19\blue28;\red237\green239\blue242;\red128\green0\blue128;
+\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c9804\c9804\c14510;\cssrgb\c94510\c94902\c96078;\cssrgb\c57919\c12801\c57269;
+\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww12780\viewh9060\viewkind0
+\deftab720
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 1Q. Write a query to select all of the columns in 	the\'a0
+\f1\fs28 \cb3 tutorial.us_housing_units
+\f0\fs32 \cb1 \'a0table without using\'a0
+\f1\fs28 \cb3 *
+\f0\fs32 \cb1 .\
+\
+\cf4 1A:year, month, month_name, south, west, midwest, northeast FROM tutorial.us_housing_units \cf2 \
+\
+2Q:Write a query to select all of the columns in\'a0
+\f1\fs28 \cb3 tutorial.us_housing_units
+\f0\fs32 \cb1 \'a0and rename them so that their first letters are capitalized.\
+\
+\cf4 2A: SELECT year AS "Year", \
+      month AS "Month", \
+      month_name AS "Month Name", \
+      south AS "South", \
+      west AS "West", \
+      midwest AS "Midwest", \
+      northeast AS "Northeast" \
+      FROM tutorial.us_housing_units \
+\
+\cf5 \
+3Q: \cf2 Write a query that uses the\'a0
+\f1\fs28 \cb3 LIMIT
+\f0\fs32 \cb1 \'a0command to restrict the result set to only 15 rows.\
+\cf4 \
+3A: SELECT * FROM tutorial.us_housing_units LIMIT 15\
+\
+\cf5 4Q: \cf2 Did the West Region ever produce\'a0
+\i more than 50,000
+\i0 \'a0housing units in one month?\
+\
+\cf4 4A: SELECT * FROM tutorial.us_housing_units WHERE west > 50\
+Yes, months 6 in 1978, 8 in 1978, and 12 in 2004 the West region produced more than 50,000 housing units.\
+\
+\cf2 5Q: Did the South Region ever produce\'a0
+\i 20,000 or fewer
+\i0 \'a0housing units in one month?\
+\
+\cf4 5A: SELECT * FROM tutorial.us_housing_units WHERE south <= 20\
+Yes, months 1 and 5 in 2011 and months 1 and 2 in 2012\
+\
+\cf5 6Q: \cf2 Write a query that only shows rows for which the month name is February.\
+\
+\cf4 6A: SELECT * FROM tutorial.us_housing_units Where month_name = 'February'\cf2 \
+\
+7Q: Write a query that only shows rows for which the month_name starts with the letter "N" or an earlier letter in the alphabet\
+\
+\cf4 7A: Select * from tutorial.us_housing_units where month_name < 'N'\cf2 \
+\
+8Q:Write a query that calculates the sum of all four regions in a separate column.\
+\
+\cf4 8A: SELECT year,\
+       month,\
+       west,\
+       south,\
+       midwest,\
+       northeast,\
+       west + south + midwest +northeast AS all_column\
+  FROM tutorial.us_housing_units\cf2 \
+\
+9Q: Write a query that returns all rows for which more units were produced in the West region than in the Midwest and Northeast combined.\
+\cf4 \
+9A:   SELECT *\
+  FROM tutorial.us_housing_units \
+  WHERE west > (midwest + northeast)\cf2 \
+\
+10Q: Write a query that calculates the percentage of all houses completed in the United States represented by each region. Only return results from the year 2000 and later.\
+\
+\cf4 10A:  SELECT year,\
+        month,\
+        south,\
+        west,\
+        midwest,\
+        northeast,\
+        (south/(south + west + midwest + northeast)*100) as south_percent,\
+        (west/(south + west + midwest + northeast)*100) as west_percent,\
+        (midwest/(south + west + midwest + northeast)*100) as midwest_percent,\
+        (northeast/(south + west + midwest + northeast)*100) as northeast_percent\
+        From tutorial.us_housing_units where year >= 2000\
+\
+\cf2 11Q: Write a query that returns all rows for which Ludacris was a member of the group.\
+\
+\cf4 11A: select * from tutorial.billboard_top_100_year_end where "group" ilike '%ludacris%'\
+\cf2 \
+12Q: Write a query that returns all rows for which the first artist listed in the group has a name that begins with "DJ".\
+\cf4 \
+12A: Select * from tutorial.billboard_top_100_year_end where "group" like 'DJ%'\cf2 \
+\
+13Q: Write a query that shows all of the entries for Elvis and M.C. Hammer.\
+\cf4 \
+13A: Select * from tutorial.billboard_top_100_year_end where artist in ('M.C. Hammer', 'Hammer', 'Elvis Presley')\cf2 \
+\
+14Q: Write a query that shows all top 100 songs from January 1, 1985 through December 31, 1990.\
+\
+\cf4 14A: Write a query that shows all top 100 songs from January 1, 1985 through December 31, 1990.\cf2 \
+\
+15Q: Write a query that shows all of the rows for which\'a0
+\f1\fs28 \cb3 song_name
+\f0\fs32 \cb1 \'a0is null.\
+\
+\cf4 15A: Select * from tutorial.billboard_top_100_year_end where song_name is null\cf2 \
+\
+16Q: Write a query that surfaces all rows for top-10 hits for which Ludacris is part of the Group.\
+\
+\cf4 16A:Select * from tutorial.billboard_top_100_year_end \
+where year_rank <= 10 \
+and "group" ilike ('%Ludacris%')\cf2 \
+\
+17Q: Write a query that surfaces the top-ranked records in 1990, 2000, and 2010.\
+\
+\cf4 17A: Select * from tutorial.billboard_top_100_year_end \
+where year_rank <= 10\
+and year in (1990, 2000, 2010)\cf2 \
+\
+18Q: Write a query that lists all songs from the 1960s with "love" in the title.\
+\
+\cf4 18A:Select * from tutorial.billboard_top_100_year_end\
+where song_name ilike ('%love%')\
+and year in (1960)\cf2 \
+\
+19Q: Write a query that returns all rows for top-10 songs that featured either Katy Perry or Bon Jovi.\
+\
+\cf4 19A: Select * \
+from tutorial.billboard_top_100_year_end\
+Where year_rank <=10\
+AND ("group" ilike '%Katy Perry%' or "group" ilike '%Bon Jovi%')\cf2 \
+\
+20Q: Write a query that returns all songs with titles that contain the word "California" in either the 1970s or 1990s.\
+\
+\cf4 20A: Select *\
+From tutorial.billboard_top_100_year_end\
+where song_name ilike '%California%'\
+and ((year >=1970 and year <1980) or (year >=1990 and year <2000))\cf2 \
+\
+21Q: Write a query that lists all top-100 recordings that feature Dr. Dre before 2001 or after 2009.\
+\
+\cf4 21A: Select *\
+From tutorial.billboard_top_100_year_end\
+Where "group" ilike '%Dr. Dre%'\
+And (year >2009 or year <2001)\cf2 \
+\
+22Q: Write a query that returns all rows for songs that were on the charts in 2013 and do not contain the letter "a".\
+\
+\cf4 22A: Select *\
+From tutorial.billboard_top_100_year_end\
+where year = 2013\
+and song_name not ilike '%a%'\cf2 \
+\
+23Q: Write a query that returns all rows from 2012, ordered by song title from Z to A.\
+\
+\cf4 23A: SELECT *\
+FROM tutorial.billboard_top_100_year_end\
+ORDER BY song_name DESC\cf2 \
+\
+24Q: Write a query that returns all rows from 2010 ordered by rank, with artists ordered alphabetically for each song.\
+\
+\cf4 24A: SELECT *\
+FROM tutorial.billboard_top_100_year_end\
+WHERE year = 2010\
+ORDER BY year_rank, artist\cf2 \
+\
+25Q: Write a query that shows all rows for which T-Pain was a group member, ordered by rank on the charts, from lowest to highest rank (from 100 to 1).\
+\
+\cf4 25A: Select *\
+From tutorial.billboard_top_100_year_end\
+where "group" ilike '%T-Pain%'\
+Order by year_rank DESC\cf2 \
+\
+26Q:Write a query that returns songs that ranked between 10 and 20 (inclusive) in 1993, 2003, or 2013. Order the results by year and rank, and leave a comment on each line of the WHERE clause to indicate what that line does\
+\
+\cf4 26A: Select *\
+From tutorial.billboard_top_100_year_end\
+where year_rank >=10 and year_rank <=20 --selects the songs that ranked either higher than 20 or lower than 10 for that year\
+and year in (1993, 2003, 2013) --selects songs in 1993, 2003, and 2013\
+order by year, year_rank --sorts the list by year first and then within taht year, the rank of the song\
+
+\f2\fs24 \cf5 \cb6 \strokec5 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 \
+}
